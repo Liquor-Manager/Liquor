@@ -9,8 +9,7 @@ import json
 ALLOWED_ORG = "Liquor-Manager"
 PACKAGES_DIR = Path("/Liqueur_Packages") if platform.system() != "Windows" else Path("C:/Liqueur_Packages")
 
-def gandon():
-    print("Гандон скачался")
+
 
 def add_to_packages_json(repo_name):
     packages_file = PACKAGES_DIR / "packages.json"
@@ -59,7 +58,7 @@ def download_package(repo_name: str, target_dir: Path) -> bool:
         add_to_packages_json(repo_name)
         return True
     except Exception as e:
-        print(f"❌ Ошибка загрузки: {e}")
+        print(f"❌ Error {e}")
         if 'zip_path' in locals() and zip_path.exists():
             zip_path.unlink()
         return False
@@ -85,4 +84,3 @@ Liqueur install MyRepo --name MyApp
 args = get_args()
 if args["command"] == "install":
     download_package(args["package"], PACKAGES_DIR)
-    gandon()
